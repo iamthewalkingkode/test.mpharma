@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as dataActions from './store/data/_dataActions';
 
 import { get } from './helper';
-import { Button, Col, Row } from 'antd';
+import { Button, Col, message, Row } from 'antd';
 import { Loading, Product, ProductForm } from './components';
 
 import './App.scss';
@@ -21,7 +21,7 @@ const App = props => {
     // Check if there are any products in redux. If not fetch from mock
     if (props._data.products.length === 0) {
       setLoading(true);
-      get('http://www.mocky.io/v2/5c3e15e63500006e003e9795').then(res => {
+      get('https://www.mocky.io/v2/5c3e15e63500006e003e9795').then(res => {
         setTimeout(() => {
           setLoading(false);
         }, 1000);
@@ -58,13 +58,17 @@ const App = props => {
           <div style={{ padding: 50 }}>
             <Row gutter={50}>
               {products.map(product => (
-                <Col key={product.id} span={6} className="text-center">
+                !product.deleted && <Col key={product.id} span={6} className="text-center">
                   <Product
                     {...props}
                     {...product}
                     editProduct={() => {
                       setProduct(product);
                       setShowForm(true);
+                    }}
+                    deleteProduct={() => {
+                      props.deleteProduct(product.id);
+                      message.success(`${product.name} has been deleted`);
                     }}
                   />
                 </Col>

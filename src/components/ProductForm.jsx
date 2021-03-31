@@ -49,11 +49,11 @@ const ProductForm = (props) => {
             <Modal visible={visible} title={title} onCancel={close} footer={null} maskClosable={false}>
                 <Form form={form} layout="vertical" onFinish={submit}>
                     <Form.Item colon={false} label="Name" name="name" rules={[{ required: true, message: 'This field is required' }]}>
-                        <Input autoComplete="off" size="large" disabled={submitting} />
+                        <Input autoComplete="off" size="large" autoFocus disabled={submitting} />
                     </Form.Item>
 
                     <Form.Item colon={false} label="Price" name="price" rules={[{ required: method === 'post' ? true : false, message: 'This field is required' }]}>
-                        <Input type="number" autoComplete="off" size="large" disabled={submitting} />
+                        <Input type="number" autoComplete="off" size="large" step={0.01} disabled={submitting} />
                     </Form.Item>
 
                     <div className="divider"></div>
