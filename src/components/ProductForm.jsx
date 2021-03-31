@@ -14,12 +14,15 @@ const ProductForm = (props) => {
 
     useEffect(() => {
         if (product.id) {
-            setTitle(`Edit product: ${product.name}`);
+            setTitle(`Edit product`);
             setMethod('put');
+            form.setFieldsValue(product);
         } else {
             setTitle(`Add new product`);
             setMethod('post');
+            form.setFieldsValue({});
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product]);
 
     const submit = (v) => {
@@ -28,7 +31,10 @@ const ProductForm = (props) => {
             message.success(`${v.name} added to products`);
             close();
         } else {
-
+            v['id'] = product.id;
+            props.updateProduct(v);
+            message.success(`${v.name} has been updated`);
+            close();
         }
     }
 
@@ -40,13 +46,13 @@ const ProductForm = (props) => {
 
     return (
         <React.Fragment>
-            <Modal visible={visible} title={title} onCancel={close} footer={null}>
+            <Modal visible={visible} title={title} onCancel={close} footer={null} maskClosable={false}>
                 <Form form={form} layout="vertical" onFinish={submit}>
                     <Form.Item colon={false} label="Name" name="name" rules={[{ required: true, message: 'This field is required' }]}>
                         <Input autoComplete="off" size="large" disabled={submitting} />
                     </Form.Item>
 
-                    <Form.Item colon={false} label="Price" name="price" rules={[{ required: true, message: 'This field is required' }]}>
+                    <Form.Item colon={false} label="Price" name="price" rules={[{ required: method === 'post' ? true : false, message: 'This field is required' }]}>
                         <Input type="number" autoComplete="off" size="large" disabled={submitting} />
                     </Form.Item>
 

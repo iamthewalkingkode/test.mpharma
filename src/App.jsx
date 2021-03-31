@@ -58,8 +58,15 @@ const App = props => {
           <div style={{ padding: 50 }}>
             <Row gutter={50}>
               {products.map(product => (
-                <Col span={6} className="text-center">
-                  <Product {...product} />
+                <Col key={product.id} span={6} className="text-center">
+                  <Product
+                    {...props}
+                    {...product}
+                    editProduct={() => {
+                      setProduct(product);
+                      setShowForm(true);
+                    }}
+                  />
                 </Col>
               ))}
             </Row>
@@ -72,6 +79,7 @@ const App = props => {
         visible={showForm}
         product={product}
         onCancel={() => {
+          setProduct({});
           setShowForm(false);
         }}
       />
