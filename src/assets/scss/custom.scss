@@ -1,4 +1,14 @@
-// @import './animate.min.css';
+$primary: #FF5100;
+
+body {
+    background-color: #F4F6F7 !important;
+}
+
+h1,
+h2,
+h3 {
+    font-family: SofiaProBold;
+}
 
 .flex-middle {
     display: flex;
@@ -8,4 +18,51 @@
 .flex-center {
     display: flex;
     align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.divider {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #eee;
+}
+
+.toolbar {
+    background-color: #fff;
+    padding: 20px;
+    // margin-bottom: 5vh;
+}
+
+#Product {
+    background-color: #fff;
+    padding: 70px 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 16px 16px 0 rgba(61, 118, 165, .08);
+    margin-bottom: 50px;
+
+    .price {
+        color: $primary;
+        font-size: 4rem;
+        line-height: 1.5;
+        margin-bottom: 0;        
+    }
+
+    .name {
+        font-size: 1rem;
+    }
 }
