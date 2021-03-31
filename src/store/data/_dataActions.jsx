@@ -1,10 +1,8 @@
-import { setStorageJson } from '../../helper';
 import { SET_PRODUCTS } from '../_types';
 
 
 export function setProducts(data) {
     return dispatch => {
-        setStorageJson('products', data);
         dispatch({
             type: SET_PRODUCTS, data,
         });
@@ -15,7 +13,7 @@ export function createProduct(data) {
     return (dispatch, getState) => {
         var products = getState().data.products;
         var product = {
-            id: products[products.length - 1].id + 1,
+            id: Math.max(...products.map(p => { return p.id; })) + 1,
             name: data.name,
             prices: [
                 {
@@ -26,7 +24,6 @@ export function createProduct(data) {
             ]
         };
         products = products.concat(product);
-        setStorageJson('products', products);
         dispatch({
             type: SET_PRODUCTS, data: products,
         });
@@ -54,21 +51,22 @@ export function updateProduct(data) {
                 ]
             }
         }
-        setStorageJson('products', products);
         dispatch({
             type: SET_PRODUCTS, data: products,
         });
     }
 };
 
-export function deleteProduct(data) {
+export function deleteProduct(id) {
     return (dispatch, getState) => {
-        console.log(
-            getState()
-        );
-        // setStorageJson('products', data);
-        // dispatch({
-        //     type: SET_PRODUCTS, data,
-        // });
+        var products = getState().data.products;
+        var i = products.indexOf(products.find(p => p.id === id));
+        products[i] = {
+            ...products[i],
+            deleted: true,
+        }
+        dispatch({
+            type: SET_PRODUCTS, data: products,
+        });
     }
 };

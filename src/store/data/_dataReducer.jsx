@@ -1,4 +1,4 @@
-import { getStorageJson } from '../../helper';
+import { getStorageJson, setStorageJson } from '../../helper';
 import { SET_PRODUCTS } from '../_types';
 
 const initialState = {
@@ -19,6 +19,10 @@ const dataReducer = (state = initialState, action) => {
                     })
                 }
             });
+            data.sort(function (a, b) {
+                return b.id - a.id;
+            });
+            setStorageJson('products', data);
             return {
                 ...state,
                 products: data,
