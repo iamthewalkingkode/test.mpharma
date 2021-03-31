@@ -7,10 +7,10 @@ import reportWebVitals from './reportWebVitals';
 // redux store
 import configureStore, { history } from './store/_store';
 
-import App from './App';
+import App from './App.jsx';
 
-import './index.css';
 import './index.less';
+import './assets/scss/animate.min.css';
 
 const store = configureStore();
 

@@ -1,7 +1,8 @@
-import { SET_SET_SETTINGS } from '../_types';
+import { getStorageJson } from '../../helper';
+import { SET_PRODUCTS } from '../_types';
 
 const initialState = {
-    products: [],
+    products: getStorageJson('products'),
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -9,10 +10,10 @@ const dataReducer = (state = initialState, action) => {
         default:
             return state;
 
-        case SET_SET_SETTINGS:
+        case SET_PRODUCTS:
             return {
                 ...state,
-                [action.key]: action.value
+                products: action.data,
             };
     }
 };
