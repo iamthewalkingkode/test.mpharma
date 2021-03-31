@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import React from 'react';
 import { DeleteOutlined, EditFilled } from '@ant-design/icons';
 
@@ -16,7 +16,16 @@ const Product = ({ prices, name, editProduct, deleteProduct }) => {
             <div id="Product">
                 <div className="actions">
                     <Button type="text" icon={<EditFilled />} size="small" onClick={editProduct} /> &nbsp;
-                    <Button type="text" icon={<DeleteOutlined />} size="small" onClick={deleteProduct} />
+                    <Button type="text" icon={<DeleteOutlined />} size="small" onClick={() => {
+                        Modal.confirm({
+                            title: `Delete product`,
+                            content: `Are you sure you wnat to delete ${name}?`,
+                            okText: 'Yes, Delete',
+                            onOk: () => {
+                                deleteProduct();
+                            }
+                        });
+                    }} />
                 </div>
                 <h1 className="price">¢{prices[0].price}</h1>
                 <h3 className="name">{name}</h3>
