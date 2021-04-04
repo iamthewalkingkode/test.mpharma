@@ -3,7 +3,7 @@ import React from 'react';
 import { DeleteOutlined, EditFilled } from '@ant-design/icons';
 
 
-const Product = ({ prices, name, editProduct, deleteProduct }) => {
+const Product = ({ id, name, prices, editProduct, deleteProduct }) => {
     var oldPrices = [];
     prices.forEach((price, p) => {
         if (p > 0) {
@@ -13,7 +13,7 @@ const Product = ({ prices, name, editProduct, deleteProduct }) => {
 
     return (
         <React.Fragment>
-            <div id="Product">
+            <div id="Product" data-test-id={`product-${id}`}>
                 <div className="actions">
                     <Button type="text" icon={<EditFilled />} size="small" onClick={editProduct} /> &nbsp;
                     <Button type="text" icon={<DeleteOutlined />} size="small" onClick={() => {

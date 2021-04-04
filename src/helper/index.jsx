@@ -7,7 +7,7 @@ export const get = async (url, data = {}) => {
     return axios({
         method: 'GET', url,
         headers: {},
-        params: data
+        params: data,
     }).then(response => {
         const res = response.data;
         return res;
